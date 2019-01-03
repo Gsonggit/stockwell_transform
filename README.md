@@ -5,16 +5,17 @@ Included:
 
 1. origin(redundant) S_transform  
 
-![stockwell](/origin s_transform.png)  
+![stockwell](https://github.com/Gsonggit/stockwell_transform/blob/master/origin s_transform.png)  
 
-the result is as same as [claudiodsf](https://github.com/claudiodsf/stockwell)  
+!the result is as same as [claudiodsf](https://github.com/claudiodsf/stockwell)  
 
 
-If possible,Will be updated:
+If possible,Will be updated:  
 
-Fast S_transform;
-(Fast)generalized S_transform;
-(Fast)Discrete orthogonal S_transform;
-2-D S_transform;
+
+Fast S_transform;  
+(Fast)generalized S_transform;  
+(Fast)Discrete orthogonal S_transform;  
+2-D S_transform;  
 
 
