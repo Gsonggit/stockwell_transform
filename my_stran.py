@@ -23,8 +23,7 @@ from scipy import signal
 
 def st(data,minfreq,maxfreq,samprate=1,freqsamprate=1,remove_edge=False,analytic_signal=False,factor=1):
     if data.shape[0] <= 1 or len(data.shape)>1 :
-        print('input data invalid,please check!')
-        return 	
+        raise TypeError('input data invalid ,please check!') 	
     orig=data
     st_res=np.zeros((int((maxfreq-minfreq)/freqsamprate)+1,len(data)),dtype='c8')	
     #data.reshape(-1,1)
