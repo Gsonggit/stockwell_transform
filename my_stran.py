@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# 1-D redundant stockwell transform code modified by GaoSong from origion author Stockwell matlab code(st.m also included in module)
+# 1-D Fast stockwell transform code modified by GaoSong from origion Stockwell matlab code(st.m also included in module)
 #
 # parameter:
 #    data——numpy.ndarray , the origion 1-D signal
@@ -59,17 +59,21 @@ def g_window(length,freq,factor):
     return sum(np.exp(vector))
 	
 	
-# if __name__=='__main__':
-    # t=np.linspace(0,10,5001)
-    # w=signal.chirp(t,f0=12.5,f1=2.5,t1=10,method='linear')
-    # fmin=0
-    # fmax=250
-    # stres=st(w,fmin,fmax)
-    # dt=t[1]-t[0]
-    # fmin=fmin/(len(w)*dt)
-    # fmax=fmax/(len(w)*dt)
-    # extent=(t[0],t[-1],fmin,fmax)
+if __name__=='__main__':
     
+    import time
+    stime=time.time()
+    t=np.linspace(0,10,5001)
+    w=signal.chirp(t,f0=12.5,f1=2.5,t1=10,method='linear')
+    fmin=0
+    fmax=250
+    stres=st(w,fmin,fmax)
+    dt=t[1]-t[0]
+    fmin=fmin/(len(w)*dt)
+    fmax=fmax/(len(w)*dt)
+    extent=(t[0],t[-1],fmin,fmax)
+    etime=time.time()
+    print('total time-%f',etime-stime)
     # import matplotlib.pyplot as plt
     
     # fig,ax=plt.subplots(2,1,sharex=True)
