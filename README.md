@@ -5,7 +5,7 @@ Included:
 
 1. origin(redundant) S_transform  
 
-![stockwell](https://github.com/Gsonggit/stockwell_transform/blob/master/origin s_transform.png)  
+![stockwell](https://github.com/Gsonggit/stockwell_transform/blob/master/origin_s_transform.png)  
 
 !the result is as same as [claudiodsf](https://github.com/claudiodsf/stockwell)  
 
