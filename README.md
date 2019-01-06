@@ -1,5 +1,5 @@
 # stockwell_transform
-1-D Fast S_transform matlab code transfered to Python 
+1-D  S_transform matlab code transfered to Python 
 
 Included:  
 
