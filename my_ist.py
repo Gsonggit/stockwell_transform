@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# 1-D Fast inverse stockwell transform code modified by GaoSong from origion Stockwell matlab code(ist.m also included in module)
+# 1-D inverse stockwell transform code modified by GaoSong from origion ist.m code
 
 import numpy as np
 
