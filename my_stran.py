@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# 1-D stockwell transform code modified by GaoSong from origion st.m code
+# 1-D redundant stockwell transform code modified by GaoSong from origion st.m code
 #
 # parameter:
 #    data——numpy.ndarray , the origion 1-D signal
@@ -16,13 +16,14 @@
 # For simple use ———— if you have 500 points of 50Hz singal，you want check 10-30Hz frequency domain
 #               then set st(data,minfreq=100,maxfreq=300)
 #
-# Date:2019/1/7
+# Date:2019/1/9
 #
 # Copyright (c) by GaoSong
 
 import numpy as np
-from obspy.core import Stream,Trace
 from scipy import signal 
+import sys
+import copy
 
 def st(data,minfreq=0,maxfreq=None,samprate=None,freqsamprate=1,remove_edge=False,analytic_signal=False,factor=1):
     if data.shape[0] <= 1 or len(data.shape) > 1 :
@@ -36,14 +37,19 @@ def st(data,minfreq=0,maxfreq=None,samprate=None,freqsamprate=1,remove_edge=Fals
     if not maxfreq and samprate:
         maxfreq=samprate//2
 
-    orig=data
+    orig=copy.copy(data)
     st_res=np.zeros((int((maxfreq-minfreq)/freqsamprate)+1,len(data)),dtype='c8')	
     
     if remove_edge:
         print('remove_edge selected;  Remove trend with polynomial fit and taper!')
+        try :
+            from obspy.core import Trace
+        except ModuleNotFoundError:
+            print('Obspy not found ,please install Obspy!')
+            sys.exit()
         tmp=Trace(data=orig)
-        tmp.detrend('polynomial')
-        tmp.taper(0.05)
+        tmp.detrend('polynomial',order=2)
+        tmp.taper(0.04)
         orig=tmp.data
     if analytic_signal:
         print('analytic_signal selected;  Calculating analytic signal!')
@@ -89,5 +95,5 @@ def g_window(length,freq,factor):
 #     ax[0].plot(t,w)
 #     ax[1].imshow(np.abs(stres),origin='lower',extent=extent)
 #     ax[1].axis('tight')
-#     ax[1].set(xlabel='time')
+#     ax[1].set(xlabel='time',ylabel='frequency')
 #     plt.show()

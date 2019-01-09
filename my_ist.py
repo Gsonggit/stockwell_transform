@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 #
 # 1-D inverse stockwell transform code modified by GaoSong from origion ist.m code
+#
+#    the input matrix must be redundant size(N,N//2+1)
 
 import numpy as np
 
