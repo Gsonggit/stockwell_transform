@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #
-# 1-D redundant stockwell transform code modified by GaoSong from origion st.m code
+# 1-D redundant forward and inverse stockwell transform code modified by GaoSong from origion st.m and ist.m code
 #
 # parameter:
 #    data——numpy.ndarray , the origion 1-D signal
@@ -66,6 +66,19 @@ def st(data,minfreq=0,maxfreq=None,samprate=None,freqsamprate=1,remove_edge=Fals
         st_res[int(i/freqsamprate)]=np.fft.ifft(vec[minfreq+i:minfreq+i+len(data)]*g_window(len(data),minfreq+i,factor))
     return st_res
 
+
+def ist(st_matrix):
+    # 1-D inverse stockwell transform code modified by GaoSong from origion ist.m code
+	#    the input matrix must be redundant size(N,N//2+1)
+    stsp=np.sum(st_matrix,axis=1)
+    if st_matrix.shape[1] % 2 != 0:
+        negsp=stsp[2:].T[::-1]
+    else:
+        negsp=stsp[2:-1].T[::-1]
+
+    fullstsp=np.hstack((np.conjugate(stsp.T),negsp))
+    ts=np.fft.ifft(fullstsp).real
+    return ts
 
 def g_window(length,freq,factor):    
     # vector=np.zeros((2,length))
