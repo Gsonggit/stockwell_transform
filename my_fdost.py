@@ -116,9 +116,45 @@ def idost(fdost_res):
     return ori
 
 
+def sf_partition(N):
+    # return spatial domain and frequency domain refer to fdost(data)
+    p_limit=math.floor(math.log2(N))
+    sf=[]
+    ff=[]
+    freq=[x for x in range(N//2)]+[y for y in range(-N//2,0)]
+    k=0
+    for i in range(p_limit):
+        mu,beta,tau=vbt(i,N)        
+        for j in range(beta):
+            ss=[N/(2*beta)*i for i in range(2*beta) if i %2 == 1]
+            if j == 0:
+                v_matrix=np.array(ss)
+                h_matrix=np.array(np.tile(np.array(freq[k]),beta))
+            else:
+                v_matrix=np.vstack((v_matrix,np.array(ss)))       
+                h_matrix=np.vstack((h_matrix,np.tile(np.array(freq[k]),beta)))
+            k+=1
+        sf.append(v_matrix)
+        ff.append(h_matrix)
+    for i in range(-p_limit,0):
+        mu,beta,tau=vbt(i,N)        
+        for j in range(beta):
+            ss=[N/(2*beta)*i for i in range(2*beta) if i %2 == 1]
+            if j == 0:
+                v_matrix=np.array(ss)
+                h_matrix=np.array(np.tile(np.array(freq[k]),beta))
+            else:
+                v_matrix=np.vstack((v_matrix,np.array(ss)))      
+                h_matrix=np.vstack((h_matrix,np.tile(np.array(freq[k]),beta)))
+            k+=1
+        sf.append(v_matrix)
+        ff.append(h_matrix)
+    return sf,ff
+
 
 
 # if __name__=='__main__':
+
 
 #     t=np.linspace(0,10,4096)
 #     w=signal.chirp(t,f0=12.5,f1=2.5,t1=10,method='linear')
